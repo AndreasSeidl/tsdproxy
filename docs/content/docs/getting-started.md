@@ -50,6 +50,9 @@ files: {}
 tailscale:
   providers:
     default: # name of the provider
+      oauthKey: "" # optional, define OAuth client secret here (preferred for hands-off deployment)
+      oauthKeyFile: "" # optional, load OAuth client secret from file. If set, oauthKey is ignored
+      oauthTags: [] # required when using OAuth, e.g. ["tag:server"] or ["tag:dev", "tag:test"]
       authKey: "" # optional, define authkey here
       authKeyFile: "" # optional, use this to load authkey from file. If this is defined, Authkey is ignored
       controlUrl: https://controlplane.tailscale.com # use this to override the default control URL

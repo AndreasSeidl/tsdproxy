@@ -32,6 +32,9 @@ files:
 tailscale:
   providers:
     default: # name of the provider
+      oauthKey: "" # define OAuth client secret here (preferred for hands-off deployment)
+      oauthKeyFile: "" # use this to load OAuth client secret from file. If set, oauthKey is ignored
+      oauthTags: [] # required when using OAuth: list of tags like ["tag:server", "tag:prod"]
       authKey: "" # define authkey here
       authKeyFile: "" # use this to load authkey from file. If this is defined, Authkey is ignored
       controlUrl: https://controlplane.tailscale.com # use this to override the default control URL
@@ -70,6 +73,9 @@ with the following options:
 
 ```yaml  {filename="/config/tsdproxy.yaml"}
    default: # name of the provider
+      oauthKey: "" # (optional) OAuth client secret for hands-off deployment
+      oauthKeyFile: "" # (optional) load OAuth client secret from file
+      oauthTags: ["tag:server"] # (required with OAuth) tags configured for the OAuth client
       authKey: your-authkey # define authkey here
       authKeyFile: "" # use this to load authkey from file.
       controlUrl: https://controlplane.tailscale.com 
@@ -81,16 +87,22 @@ Look at next example with multiple providers.
 tailscale:
   providers:
     default:
+      oauthKey: ""
+      oauthTags: ["tag:server"]
       authKey: your-authkey
       authKeyFile: ""
       controlUrl: https://controlplane.tailscale.com
  
     server1:
+      oauthKey: ""
+      oauthTags: ["tag:dev"]
       authKey: authkey-server1
       authKeyFile: ""
       controlUrl: http://server1
  
     differentkey:
+      oauthKey: ""
+      oauthTags: ["tag:prod", "tag:critical"]
       authKey: authkey-with-diferent-tags
       authKeyFile: ""
       controlUrl: https://controlplane.tailscale.com

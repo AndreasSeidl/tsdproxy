@@ -20,6 +20,8 @@ type Client struct {
 	log zerolog.Logger
 
 	Hostname   string
+	OAuthKey   string
+	OAuthTags  []string
 	AuthKey    string
 	controlURL string
 	datadir    string
@@ -29,9 +31,11 @@ func New(log zerolog.Logger, name string, provider *config.TailscaleServerConfig
 	datadir := filepath.Join(config.Config.Tailscale.DataDir, name)
 
 	return &Client{
-		log:      log.With().Str("tailscale", name).Logger(),
-		Hostname: name,
-		// make sure the auth key is trimmed
+		log:        log.With().Str("tailscale", name).Logger(),
+		Hostname:   name,
+		// make sure the keys are trimmed
+		OAuthKey:   strings.TrimSpace(provider.OAuthKey),
+		OAuthTags:  provider.OAuthTags,
 		AuthKey:    strings.TrimSpace(provider.AuthKey),
 		datadir:    datadir,
 		controlURL: provider.ControlURL,
@@ -46,20 +50,34 @@ func (c *Client) NewProxy(config *proxyconfig.Config) (proxyproviders.ProxyInter
 
 	log := c.log.With().Str("Hostname", config.Hostname).Logger()
 
-	// If the auth key is not set, use the provider auth key
-	authKey := config.Tailscale.AuthKey
-	if authKey == "" {
+	// Determine which key to use with the following priority:
+	// 1. OAuth key from config (per-proxy)
+	// 2. OAuth key from provider (global)
+	// 3. Auth key from config (per-proxy)
+	// 4. Auth key from provider (global)
+	var authKey string
+	var advertiseTags []string
+	if config.Tailscale.OAuthKey != "" {
+		authKey = config.Tailscale.OAuthKey
+		advertiseTags = c.OAuthTags
+	} else if c.OAuthKey != "" {
+		authKey = c.OAuthKey
+		advertiseTags = c.OAuthTags
+	} else if config.Tailscale.AuthKey != "" {
+		authKey = config.Tailscale.AuthKey
+	} else {
 		authKey = c.AuthKey
 	}
 
 	datadir := path.Join(c.datadir, config.Hostname)
 
 	tserver := &tsnet.Server{
-		Hostname:     config.Hostname,
-		AuthKey:      authKey,
-		Dir:          datadir,
-		Ephemeral:    config.Tailscale.Ephemeral,
-		RunWebClient: config.Tailscale.RunWebClient,
+		Hostname:      config.Hostname,
+		AuthKey:       authKey,
+		AdvertiseTags: advertiseTags,
+		Dir:           datadir,
+		Ephemeral:     config.Tailscale.Ephemeral,
+		RunWebClient:  config.Tailscale.RunWebClient,
 		UserLogf: func(format string, args ...any) {
 			log.Info().Msgf(format, args...)
 		},

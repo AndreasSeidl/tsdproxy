@@ -26,6 +26,15 @@ func (c *config) validate() error {
 		}
 	}
 
+	// Validate that OAuth keys have at least one tag
+	for name, provider := range c.Tailscale.Providers {
+		if provider.OAuthKey != "" || provider.OAuthKeyFile != "" {
+			if len(provider.OAuthTags) == 0 {
+				return fmt.Errorf("Tailscale provider '%s': oauthTags is required when using oauthKey or oauthKeyFile", name)
+			}
+		}
+	}
+
 	// TODO: add validation for each provider
 	// TODO: add default proxy provider to each proxy if not defined
 	//

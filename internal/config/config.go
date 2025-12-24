@@ -57,9 +57,12 @@ type (
 
 	// TailscaleServerConfig struct stores Tailscale Server configuration
 	TailscaleServerConfig struct {
-		AuthKey     string `default:"" validate:"omitempty" yaml:",omitempty"`
-		AuthKeyFile string `default:"" validate:"omitempty" yaml:",omitempty"`
-		ControlURL  string `default:"https://controlplane.tailscale.com" validate:"uri"`
+		OAuthKey     string   `default:"" validate:"omitempty" yaml:",omitempty"`
+		OAuthKeyFile string   `default:"" validate:"omitempty" yaml:",omitempty"`
+		OAuthTags    []string `default:"" validate:"omitempty,dive,required" yaml:",omitempty"`
+		AuthKey      string   `default:"" validate:"omitempty" yaml:",omitempty"`
+		AuthKeyFile  string   `default:"" validate:"omitempty" yaml:",omitempty"`
+		ControlURL   string   `default:"https://controlplane.tailscale.com" validate:"uri"`
 	}
 
 	// filesConfig struct stores File target provider configuration.
@@ -108,6 +111,17 @@ func InitializeConfig() error {
 	// unless defaults of map type are not loaded.
 	if err := defaults.Set(Config); err != nil {
 		fmt.Printf("Error loading defaults: %v", err)
+	}
+
+	// load oauth keys from files
+	for _, d := range Config.Tailscale.Providers {
+		if d != nil && d.OAuthKeyFile != "" {
+			oauthkey, err := Config.getAuthKeyFromFile(d.OAuthKeyFile)
+			if err != nil {
+				return err
+			}
+			d.OAuthKey = oauthkey
+		}
 	}
 
 	// load auth keys from files
