@@ -18,9 +18,9 @@ import (
 	"github.com/docker/docker/client"
 	"github.com/rs/zerolog"
 
-	"github.com/almeidapaulopt/tsdproxy/internal/config"
-	"github.com/almeidapaulopt/tsdproxy/internal/model"
-	"github.com/almeidapaulopt/tsdproxy/internal/targetproviders"
+	"github.com/AndreasSeidl/tsdproxy/internal/config"
+	"github.com/AndreasSeidl/tsdproxy/internal/model"
+	"github.com/AndreasSeidl/tsdproxy/internal/targetproviders"
 )
 
 type (

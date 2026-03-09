@@ -9,9 +9,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/almeidapaulopt/tsdproxy/internal/config"
-	"github.com/almeidapaulopt/tsdproxy/internal/model"
-	"github.com/almeidapaulopt/tsdproxy/internal/proxyproviders"
+	"github.com/AndreasSeidl/tsdproxy/internal/config"
+	"github.com/AndreasSeidl/tsdproxy/internal/model"
+	"github.com/AndreasSeidl/tsdproxy/internal/proxyproviders"
 
 	"github.com/rs/zerolog"
 	"tailscale.com/client/tailscale/v2"

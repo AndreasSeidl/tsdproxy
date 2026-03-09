@@ -12,8 +12,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/almeidapaulopt/tsdproxy/internal/model"
-	"github.com/almeidapaulopt/tsdproxy/internal/proxyproviders"
+	"github.com/AndreasSeidl/tsdproxy/internal/model"
+	"github.com/AndreasSeidl/tsdproxy/internal/proxyproviders"
 
 	"github.com/rs/zerolog"
 	"tailscale.com/client/local"

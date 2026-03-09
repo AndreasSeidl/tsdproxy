@@ -3,7 +3,7 @@ default: dev
 # Change these variables as necessary.
 MAIN_PACKAGE_PATH := "cmd/server/main.go"
 BINARY_NAME := tsdproxy
-PACKAGE := github.com/almeidapaulopt/tsdproxy
+PACKAGE := github.com/AndreasSeidl/tsdproxy
 
 
 
@@ -22,7 +22,7 @@ DOCKER_PUSH=false
 IMAGE_TAG=latest
 
 override LDFLAGS +=  \
-  -X ${PACKAGE}/internal/core.AppVersion=${VERSION} \
+  -X ${PACKAGE}/internal/core.version=${VERSION} \
   -X ${PACKAGE}/internal/core.BuildDate=${BUILD_DATE} \
   -X ${PACKAGE}/internal/core.GitCommit=${GIT_COMMIT} \
   -X ${PACKAGE}/internal/core.GitTreeState=${GIT_TREE_STATE} \
@@ -79,7 +79,7 @@ build:
 
 ## run: run the  application
 .PHONY: run
-run: build/static build 
+run: build  # build/static build 
 	./tmp/${BINARY_NAME}
 
 
@@ -93,6 +93,11 @@ dev: docker_start
 server_start:
 	templ generate --proxy="http://localhost:5173" --watch --cmd="echo RELOAD" & 
 	air
+
+## build-frontend: build the frontend assets
+.PHONY: build-frontend
+build-frontend:
+	cd web && bun run build
 
 .PHONY: assets
 assets:

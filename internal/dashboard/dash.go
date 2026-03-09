@@ -6,11 +6,11 @@ package dashboard
 import (
 	"sync"
 
-	"github.com/almeidapaulopt/tsdproxy/internal/core"
-	"github.com/almeidapaulopt/tsdproxy/internal/model"
-	"github.com/almeidapaulopt/tsdproxy/internal/proxymanager"
-	"github.com/almeidapaulopt/tsdproxy/internal/ui/pages"
-	"github.com/almeidapaulopt/tsdproxy/web"
+	"github.com/AndreasSeidl/tsdproxy/internal/core"
+	"github.com/AndreasSeidl/tsdproxy/internal/model"
+	"github.com/AndreasSeidl/tsdproxy/internal/proxymanager"
+	"github.com/AndreasSeidl/tsdproxy/internal/ui/pages"
+	"github.com/AndreasSeidl/tsdproxy/web"
 
 	"github.com/rs/zerolog"
 )

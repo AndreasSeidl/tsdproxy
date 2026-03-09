@@ -9,7 +9,7 @@ without the need for complex configurations or additional Tailscale containers.
 
 Version 2 is already in beta. Please try and open issues if bugs detected.
 Some configurations of Version 1.x are deprecated or changed please verify it in
- [Documentation changelog](https://almeidapaulopt.github.io/tsdproxy/docs/changelog/).
+ [Documentation changelog](https://AndreasSeidl.github.io/tsdproxy/docs/changelog/).
 
 Because of some breaking changes, final version 2 arrive will not set as latest
 Docker image. We will wait some weeks to give you time to update.
@@ -18,11 +18,11 @@ Version 1 will not get new features.
 
 ## Full Documentation
 
-- [Official Documentation](https://almeidapaulopt.github.io/tsdproxy/)
+- [Official Documentation](https://AndreasSeidl.github.io/tsdproxy/)
 
 ## Breaking Changes
 
-Please read the [Documentation changelog](https://almeidapaulopt.github.io/tsdproxy/docs/changelog/)
+Please read the [Documentation changelog](https://AndreasSeidl.github.io/tsdproxy/docs/changelog/)
 for details.
 
 ## Help needed
@@ -33,11 +33,11 @@ the project.
 
 ## Docker Images
 
-1. almeidapaulopt/tsdproxy:vx.x.x  - Version x.x.x
-2. almeidapaulopt/tsdproxy:1       - Latest release of version 1.x.x
-3. almeidapaulopt/tsdproxy:2       - Latest release of version 2.x.x (beta)
-4. almeidapaulopt/tsdproxy:latest  - Latest stable
-5. almeidapaulopt/tsdproxy:dev     - Latest Development Build
+1. aseidlfernandez/tsdproxy:vx.x.x  - Version x.x.x
+2. aseidlfernandez/tsdproxy:1       - Latest release of version 1.x.x
+3. aseidlfernandez/tsdproxy:2       - Latest release of version 2.x.x (beta)
+4. aseidlfernandez/tsdproxy:latest  - Latest stable
+5. aseidlfernandez/tsdproxy:dev     - Latest Development Build
 
 ## Core Functionality
 

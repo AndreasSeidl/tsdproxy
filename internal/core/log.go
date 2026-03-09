@@ -13,7 +13,7 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 
-	"github.com/almeidapaulopt/tsdproxy/internal/config"
+	"github.com/AndreasSeidl/tsdproxy/internal/config"
 )
 
 var ErrHijackNotSupported = errors.New("hijack not supported")

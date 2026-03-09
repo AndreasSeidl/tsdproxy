@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/almeidapaulopt/tsdproxy/internal/model"
-	"github.com/almeidapaulopt/tsdproxy/web"
+	"github.com/AndreasSeidl/tsdproxy/internal/model"
+	"github.com/AndreasSeidl/tsdproxy/web"
 
 	ctypes "github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/swarm"

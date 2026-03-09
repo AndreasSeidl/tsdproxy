@@ -14,10 +14,10 @@ import (
 	"github.com/docker/docker/client"
 	"github.com/rs/zerolog"
 
-	"github.com/almeidapaulopt/tsdproxy/internal/config"
-	"github.com/almeidapaulopt/tsdproxy/internal/core"
-	"github.com/almeidapaulopt/tsdproxy/internal/dashboard"
-	pm "github.com/almeidapaulopt/tsdproxy/internal/proxymanager"
+	"github.com/AndreasSeidl/tsdproxy/internal/config"
+	"github.com/AndreasSeidl/tsdproxy/internal/core"
+	"github.com/AndreasSeidl/tsdproxy/internal/dashboard"
+	pm "github.com/AndreasSeidl/tsdproxy/internal/proxymanager"
 )
 
 type WebApp struct {

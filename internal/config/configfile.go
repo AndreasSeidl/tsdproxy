@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/almeidapaulopt/tsdproxy/internal/consts"
+	"github.com/AndreasSeidl/tsdproxy/internal/consts"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/rs/zerolog"
