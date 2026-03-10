@@ -14,7 +14,7 @@ before:
   hooks:
     - bun i --cwd ./web
     - go mod tidy
-    - go install github.com/a-h/templ/cmd/templ@latest
+    - go install github.com/a-h/templ/cmd/templ@v0.3.865
     - go generate ./...
 
 snapshot:

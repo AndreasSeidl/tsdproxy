@@ -15,7 +15,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version: "1.23"
+          go-version: "1.26.1"
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
@@ -23,7 +23,7 @@ jobs:
         run: bun i --cwd ./web
 
       - name: Install dependencies
-        run: go install github.com/a-h/templ/cmd/templ@latest
+        run: go install github.com/a-h/templ/cmd/templ@v0.3.865
       - name: Generate
         run: go generate ./...
       - name: Build

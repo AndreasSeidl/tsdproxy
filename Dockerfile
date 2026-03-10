@@ -2,13 +2,13 @@
 # Stage 1: Build web assets
 FROM oven/bun:1 AS web-builder
 WORKDIR /app/web
-COPY web/package.json web/bun.lockb* ./
+COPY web/package.json web/bun.lock ./
 RUN bun install
 COPY web/ ./
 RUN bun run build
 
 # Stage 2: Build Go application
-FROM golang:1.25 AS builder
+FROM golang:1.26.1 AS builder
 RUN apk add --no-cache ca-certificates && update-ca-certificates 2>/dev/null || true
 
 # Define o diretório de trabalho

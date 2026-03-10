@@ -31,10 +31,6 @@ type (
 		datadir      string
 		tags         string
 	}
-
-	oauth struct {
-		Authkey string `yaml:"authkey"`
-	}
 )
 
 var _ proxyproviders.Provider = (*Client)(nil)
