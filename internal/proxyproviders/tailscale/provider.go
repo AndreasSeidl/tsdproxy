@@ -63,7 +63,7 @@ func (c *Client) NewProxy(config *model.Config) (proxyproviders.ProxyInterface, 
 	log := c.log.With().Str("Hostname", config.Hostname).Logger()
 
 	datadir := path.Join(c.datadir, config.Hostname)
-	authKey := c.getAuthkey(config, datadir)
+	authKey := c.getAuthkey(config)
 
 	tserver := &tsnet.Server{
 		Hostname:     config.Hostname,
@@ -104,11 +104,11 @@ func (c *Client) getControlURL() string {
 	return c.controlURL
 }
 
-func (c *Client) getAuthkey(config *model.Config, path string) string {
+func (c *Client) getAuthkey(config *model.Config) string {
 	authKey := config.Tailscale.AuthKey
 
 	if c.clientID != "" && c.clientSecret != "" {
-		authKey = c.getOAuth(config, path)
+		authKey = c.getOAuth(config)
 	}
 
 	if authKey == "" {
@@ -117,15 +117,7 @@ func (c *Client) getAuthkey(config *model.Config, path string) string {
 	return authKey
 }
 
-func (c *Client) getOAuth(cfg *model.Config, dir string) string {
-	data := new(oauth)
-
-	file := config.NewConfigFile(c.log, path.Join(dir, "tsdproxy.yaml"), data)
-	if err := file.Load(); err == nil {
-		if data.Authkey != "" {
-			return data.Authkey
-		}
-	}
+func (c *Client) getOAuth(cfg *model.Config) string {
 
 	ctx := context.Background()
 
@@ -164,11 +156,6 @@ func (c *Client) getOAuth(cfg *model.Config, dir string) string {
 	if err != nil {
 		c.log.Error().Err(err).Msg("unable to get Oauth token")
 		return ""
-	}
-
-	data.Authkey = authkey.Key
-	if err := file.Save(); err != nil {
-		c.log.Error().Err(err).Msg("unable to save oauth file")
 	}
 
 	return authkey.Key
